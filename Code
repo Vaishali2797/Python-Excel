@@ -1,0 +1,106 @@
+# Importing the necessary packages
+
+import pandas as pd
+import openpyxl
+
+# Data in the excel sheet is stored in the form of DataFrame
+
+file = pd.read_excel(r'C:\..\Class.xlsx')
+
+# Creating new (required number of) excel files 
+
+A_path = r'C:\..\A.xlsx' # give the path
+B_path = r'C:\..\B.xlsx'
+C_path = r'C:\..\C.xlsx'
+D_path = r'C:\..\D.xlsx'
+
+A = pd.ExcelWriter(r'C:\Users\uic15903\Desktop\A.xlsx', engine='xlsxwriter')
+B = pd.ExcelWriter(r'C:\Users\uic15903\Desktop\B.xlsx', engine='xlsxwriter')
+C = pd.ExcelWriter(r'C:\Users\uic15903\Desktop\C.xlsx', engine='xlsxwriter')
+D = pd.ExcelWriter(r'C:\Users\uic15903\Desktop\D.xlsx', engine='xlsxwriter')
+
+A.save()
+B.save()
+C.save()
+D.save()
+
+# We create seperate lists and append the respective values in the list. Then we insert these list values in the excel files created respectively.
+
+j=2
+A_list = []
+B_list = []
+C_list = []
+D_list = []
+
+for i in range(len(file)):
+    if file['Class'][i] == 'A':
+        
+        A_list.append([file['Class'][i], file['Blaa'][i]])
+        
+        wb_obj = openpyxl.load_workbook(A_path) 
+        sheet = wb_obj["Sheet1"]
+        
+        sheet.cell(row=1, column=1).value = "Class"
+        sheet.cell(row=1, column=2).value = "Blaa"
+
+        
+        for j in range (0, len(A_list)):
+            sheet.cell(row=j+2, column=1).value = A_list[j][0]
+            sheet.cell(row=j+2, column=2).value = A_list[j][1]
+        
+        wb_obj.save(r'C:\..\A.xlsx')
+        
+    elif file['Class'][i] == 'B':
+        B_list.append([file['Class'][i], file['Blaa'][i]])
+        
+        wb_obj = openpyxl.load_workbook(B_path) 
+        sheet = wb_obj["Sheet1"]
+        
+        sheet.cell(row=1, column=1).value = "Class"
+        sheet.cell(row=1, column=2).value = "Blaa"
+
+        
+        for j in range (0, len(B_list)):
+            sheet.cell(row=j+2, column=1).value = B_list[j][0]
+            sheet.cell(row=j+2, column=2).value = B_list[j][1]
+        
+        wb_obj.save(r'C:\..\B.xlsx')
+        
+    elif file['Class'][i] == 'C':
+        C_list.append([file['Class'][i], file['Blaa'][i]])
+        
+        wb_obj = openpyxl.load_workbook(C_path) 
+        sheet = wb_obj["Sheet1"]
+        
+        sheet.cell(row=1, column=1).value = "Class"
+        sheet.cell(row=1, column=2).value = "Blaa"
+
+        
+        for j in range (0, len(C_list)):
+            sheet.cell(row=j+2, column=1).value = C_list[j][0]
+            sheet.cell(row=j+2, column=2).value = C_list[j][1]
+        
+        wb_obj.save(r'C:\..\C.xlsx')
+        
+    else:
+        D_list.append([file['Class'][i], file['Blaa'][i]])
+        
+        wb_obj = openpyxl.load_workbook(D_path) 
+        sheet = wb_obj["Sheet1"]
+        
+        sheet.cell(row=1, column=1).value = "Class"
+        sheet.cell(row=1, column=2).value = "Blaa"
+
+        
+        for j in range (0, len(D_list)):
+            sheet.cell(row=j+2, column=1).value = D_list[j][0]
+            sheet.cell(row=j+2, column=2).value = D_list[j][1]
+        
+        wb_obj.save(r'C:\..\D.xlsx')
+        
+        
+print(A_list)
+print(B_list)
+print(C_list)
+print(D_list)
+        
